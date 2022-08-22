@@ -4,8 +4,34 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const hearts = document.querySelectorAll('span.like-glyph')
+
+const banner = document.getElementById('modal')
+
+hearts.forEach(heart => {
+  heart.addEventListener('click', () => {
+    mimicServerCall()
+    .then(res => {
+      if (res ==='Pretend remote server notified of action!') {
+        handleClick(heart)}
+    })
+    .catch(res =>{
+      banner.classList = '';
+      banner.innerText = res;
+    })
+  })
+});
 
 
+// function for clickin on heart
+
+function handleClick(heart) {
+  if (heart.textContent === EMPTY_HEART){
+    heart.textContent = FULL_HEART
+  } else if (heart.textContent === FULL_HEART){
+    heart.textContent = EMPTY_HEART
+  }
+}
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
